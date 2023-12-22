@@ -4,7 +4,11 @@ terraformでGKEを立ち上げてみる。
 
 ## 立ち上げ概要
 
-terraformでGKEを立てるソースになります。
+terraformでGKE(GCP上のK8S)を立ち上げるものになります。
+
+必要なソースは以下にまとめてあります。
+
+https://github.com/naritomo08/terraform_GKE_public
 
 ## 前提
 
@@ -113,15 +117,20 @@ http://<External-IP>
 
 ## サンプルデプロイ削除
 
+```bash
 kubectl delete -f .
+```
 
 ## 削除方法
 
 以下のコマンドで削除可能
 
 ```bash
-cd ../default
+ｃcd ../default
 terraform destroy
 cd ../tfstate
 terraform destroy
+kubectl config current-context
+→はじめに出てくるnameのものを控える。
+kubectl config delete-context <コンテキスト名>
 ```
