@@ -1,4 +1,4 @@
-# terraform_GKE
+# terraform_GKE_public
 
 terraformでGKEを立ち上げてみる。
 
@@ -33,7 +33,7 @@ k8s関連コマンド(kubectl)を使用できていること。
 
 以下のページを参考に手動コマンドでのGKE構築できていること。
 
-[なるべくCLIでGKEクラスタを作成してみる](https://qiita.com/ttr_tkmkb/items/26328fbbf5f17b920046)
+[gcloudコマンドでGKEを立ち上げてみた。](https://qiita.com/naritomo08/items/d1a3122264b248915360)
 
 *macの場合、brewでできると思われます。
 
@@ -91,23 +91,30 @@ terraform apply
 
 ## GKE利用方法
 
+```bash
 gcloud container clusters get-credentials cluster --region asia-northeast1
 
 kubectl config get-contexts 
-
+→コンテキスト情報が出ること
 kubectl get nodes
 →3台のノードがでてくること。
+```
 
 ## サンプルデプロイ実施。
 
 manifestフォルダに移動。
-
+```bash
 kubectl apply -f deploy.yml
 
 kubectl apply -f svc-lb.yml
+```
 
+確認
+
+```bash
 kubectl get svc
 →External-IPの値を確認する。(数分待つ。)
+```
 
 以下のサイトへアクセスしてnginx画面が出てくること。
 
